@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"time"
 
 	"github.com/djeday123/blockchain2/node"
 	"github.com/djeday123/blockchain2/proto"
@@ -12,12 +13,14 @@ import (
 func main() {
 	//node := node.NewNode()
 	makeNode(":3000", []string{})
+	time.Sleep(time.Second)
 	makeNode(":4000", []string{":3000"})
+	time.Sleep(4 * time.Second)
+	makeNode(":5000", []string{":4000"})
 
 	// go func() {
 	// 	for {
-	// 		time.Sleep(2 * time.Second)
-	// 		makeTransaction()
+	// 		time.Sleep(4 * time.Second)
 	// 	}
 	// }()
 	select {}
@@ -25,12 +28,12 @@ func main() {
 
 func makeNode(listenAddr string, bootstrapNodes []string) *node.Node {
 	n := node.NewNode()
-	go n.Start(listenAddr)
-	if len(bootstrapNodes) > 0 {
-		if err := n.BootstrapNetwork(bootstrapNodes); err != nil {
-			log.Fatal(err)
-		}
-	}
+	go n.Start(listenAddr, bootstrapNodes)
+	// if len(bootstrapNodes) > 0 {
+	// 	if err := n.BootstrapNetwork(bootstrapNodes); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }
 
 	return n
 }
