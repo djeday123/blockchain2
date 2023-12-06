@@ -15,13 +15,9 @@ func SignTransaction(pk *crypto.PrivateKey, tx *proto.Transaction) *crypto.Signa
 }
 
 func HashTransaction(tx *proto.Transaction) []byte {
-	// fmt.Println("-------------------------------------")
-	// fmt.Println(tx)
-	// fmt.Println("------")
 
 	b, err := pb.Marshal(tx)
-	// fmt.Println(b)
-	// fmt.Println("------------------------")
+
 	if err != nil {
 		panic(err)
 	}

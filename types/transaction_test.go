@@ -27,12 +27,6 @@ func TestNewTransaction(t *testing.T) {
 		PublicKey:    fromPrivKey.Public().Bytes(),
 	}
 
-	// fmt.Println("============================================================")
-	// fmt.Printf("%+v \n", input)
-	// fmt.Println("============================================================")
-	// fmt.Println(input)
-	// fmt.Println("============================================================")
-
 	output1 := &proto.TxOutput{
 		Amount:  5,
 		Address: toAddress,
